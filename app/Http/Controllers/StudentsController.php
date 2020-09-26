@@ -35,45 +35,40 @@ class StudentsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Students  $students
+     * @param  \App\Models\Students  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Students $students)
+    public function show(Students $student)
     {
-        //
-    }
+        $student = Students::find($student->id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Students  $students
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Students $students)
-    {
-        //
+        return $student;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Students  $students
+     * @param  \App\Models\Students  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Students $students)
+    public function update(Request $request, Students $student)
     {
-        //
+        $student->fill($request->only("name", "identification", "is_active"))->save();
+
+        return $student;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Students  $students
+     * @param  \App\Models\Students  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Students $students)
+    public function destroy(Students $student)
     {
-        //
+        $student->delete();
+
+        return $student;
     }
 }
